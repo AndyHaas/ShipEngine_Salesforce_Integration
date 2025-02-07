@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tracking_URL__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    TEXT(Carrier__c) == &quot;Fedex&quot;,&quot;https://www.fedex.com/apps/fedextrack/index.html?tracknumbers=&quot;+Tracking_Number__c+&quot;&amp;cntry_code=us&quot;,
+    IF(TEXT(Carrier__c) == &quot;UPS&quot;,&quot;https://www.ups.com/track?loc=en_US&amp;tracknum=&quot;+Tracking_Number__c+&quot;&amp;requester=WT/trackdetails&quot;,
+        IF(TEXT(Carrier__c) == &quot;DHL&quot;,&quot;https://www.dhl.com/us-en/home/tracking.html?tracking-id=&quot;+Tracking_Number__c,
+            IF(TEXT(Carrier__c) == &quot;USPS&quot;,&quot;https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&amp;tLc=2&amp;text28777=&amp;tLabels=&quot;+Tracking_Number__c,NULL
+            )
+        )
+    )
+)</formula>
+    <label>Tracking URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

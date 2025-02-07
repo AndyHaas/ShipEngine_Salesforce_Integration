@@ -1,0 +1,25 @@
+<template>
+    <lightning-card  variant="Narrow"  title="" >
+        <div class="container">
+            <div class="api-key-container">
+            <lightning-input class="api-key" type="text" variant="standard" name="API Key" label="API Key" placeholder="Enter API Key here" onchange={handleChange}></lightning-input>
+            <lightning-button class="api-key-btn" variant="brand" label="Add API Key" title="Add API Key" onclick={saveAPIKey}></lightning-button>
+            
+            
+            </div>
+            <div class="instruction-container">
+                <span>
+                    How to get API Key from ShipEngine.
+                    <ul>
+                        <li>Log into Shipengine sandbox</li>
+                        <li>Click API Keys from the navigation</li>
+                        <li>Click Create new key.</li>
+                        <li>Name the new API Key and hi Enter to generate a key</li>
+                        <li>Copy the api key and paste it in the API Key field and click Add API Key.</li>
+                    </ul>
+                </span>
+                <lightning-button variant="brand" label="Connect ShipEngine" title="Connect ShipEngine" onclick={handleClick}></lightning-button>  
+            </div>
+        </div>
+    </lightning-card>
+</template>
