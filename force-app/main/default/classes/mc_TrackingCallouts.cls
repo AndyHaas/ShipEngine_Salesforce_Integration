@@ -1,6 +1,6 @@
 public with sharing class mc_TrackingCallouts extends RestClientLib {
     @TestVisible
-	private static final String NAMED_CREDENTIAL_NAME = 'ShipEngine_Legacy';
+	private static final String NAMED_CREDENTIAL_NAME = 'MC_ShipEngine__ShipEngine_Legacy';
 
     public mc_TrackingCallouts(){
 		this(NAMED_CREDENTIAL_NAME);
