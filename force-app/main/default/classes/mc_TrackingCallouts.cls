@@ -1,6 +1,6 @@
 public with sharing class mc_TrackingCallouts extends RestClientLib {
     @TestVisible
-	private static final String NAMED_CREDENTIAL_NAME = 'MC_ShipEngine__ShipEngine_Legacy';
+	private static final String NAMED_CREDENTIAL_NAME = 'MC_SE__ShipEngine_Legacy';
 
     public mc_TrackingCallouts(){
 		this(NAMED_CREDENTIAL_NAME);
@@ -74,7 +74,7 @@ public with sharing class mc_TrackingCallouts extends RestClientLib {
      * @return The response from the ShipEngine API
      */
     public mc_DTO_WebhookDetails startTrackingRequest(String trackingNumber, String carrierCode) {
-        String endpoint = 'tracking';
+        String endpoint = 'tracking/start';
         String query = 'carrier_code=' + carrierCode + '&tracking_number=' + trackingNumber;
 
         // Prep the response
