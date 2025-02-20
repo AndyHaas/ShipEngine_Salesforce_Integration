@@ -1,6 +1,6 @@
-public with sharing class mc_GetTrackingDetails {
+global with sharing class mc_GetTrackingDetails {
     @InvocableMethod(label='Get Tracking Details' category='Tracking')
-    public static List<Response> getTrackingDetails(List<trackingDetails> trackingDetailsList) {
+    global static List<Response> getTrackingDetails(List<trackingDetails> trackingDetailsList) {
         List<Response> responses = new List<Response>();
 
         mc_TrackingCallouts trackingCalloutInstance = new mc_TrackingCallouts(); 
@@ -20,15 +20,15 @@ public with sharing class mc_GetTrackingDetails {
         return responses;
     }
 
-    public class trackingDetails {
+    global class trackingDetails {
         @InvocableVariable(label='Tracking Number' required=true)
-        public String trackingNumber;
+        global String trackingNumber;
         @InvocableVariable(label='Carrier Code' required=true)
-        public String trackingNumberCarrierCode;
+        global String trackingNumberCarrierCode;
     }
 
-    public class Response {
+    global class Response {
         @InvocableVariable(label='Tracking Response' required=true)
-        public mc_DTO_TrackingDetails trackingResponse;
+        global mc_DTO_TrackingDetails trackingResponse;
     }
 }
