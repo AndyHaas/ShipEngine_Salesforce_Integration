@@ -1,6 +1,6 @@
-public class mc_StartTracking {
+global class mc_StartTracking {
 @InvocableMethod(label='Start Tracking' category='Tracking')
-    public static List<Response> startTrackingDetails(List<trackingDetails> trackingDetailsList) {
+    global static List<Response> startTrackingDetails(List<trackingDetails> trackingDetailsList) {
         List<Response> responses = new List<Response>();
 
         mc_TrackingCallouts trackingCalloutInstance = new mc_TrackingCallouts(); 
@@ -20,15 +20,15 @@ public class mc_StartTracking {
         return responses;
     }
 
-    public class trackingDetails {
+    global class trackingDetails {
         @InvocableVariable(label='Tracking Number' required=true)
-        public String trackingNumber;
+        global String trackingNumber;
         @InvocableVariable(label='Carrier Code' required=true)
-        public String trackingNumberCarrierCode;
+        global String trackingNumberCarrierCode;
     }
 
-    public class Response {
+    global class Response {
         @InvocableVariable(label='Tracking Response' required=true)
-        public mc_DTO_WebhookDetails startTrackingResponse;
+        global mc_DTO_WebhookDetails startTrackingResponse;
     }
 }
