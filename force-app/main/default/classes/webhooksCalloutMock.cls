@@ -1,5 +1,6 @@
 @isTest
 global class webhooksCalloutMock implements HttpCalloutMock{
+    /* Respond with a 204 status */
     global HttpResponse respond(HttpRequest req){
         HttpResponse res = new HttpResponse();
         res.setHeader('Content-Type','application/json');

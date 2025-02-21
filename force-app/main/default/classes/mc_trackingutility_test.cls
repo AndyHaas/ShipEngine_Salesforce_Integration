@@ -1,6 +1,7 @@
 @isTest
 public class mc_trackingutility_test {
-	@isTest
+	/* Get the base URL of the tracking ultility. */
+ @isTest
     public static void getBaseURLTest(){
         Test.startTest();
         String baseURL = mc_TrackingUltility.getBaseUrl();
@@ -8,6 +9,7 @@ public class mc_trackingutility_test {
         Test.stopTest();
     }
     
+    /* formatCarrierTest - Test method for tracking a carrier */
     @isTest
     public static void formatCarrierTest(){
         Test.StartTest();
@@ -16,6 +18,7 @@ public class mc_trackingutility_test {
         Test.StopTest();
     }
     
+    /* This method checks the tracking status of a specific node. */
     @isTest
     public static void getTrackingStatusTest(){
         Test.StartTest();
@@ -42,6 +45,7 @@ public class mc_trackingutility_test {
         Test.StopTest();
     }
     
+    /* This method is used to check the status of the current tracking. */
     @isTest
     public static void testm(){
          

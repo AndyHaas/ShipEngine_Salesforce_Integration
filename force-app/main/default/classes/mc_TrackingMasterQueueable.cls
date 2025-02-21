@@ -5,6 +5,7 @@ public class mc_TrackingMasterQueueable implements Queueable{
         this.trackingMasterIds = trackingMasterIds;
     }
 
+    /* This method is called to process a sequence of Tracking_Master records. */
     public void execute(QueueableContext context) {
         // Nebula.Logger.info('Started processing Tracking Master records');
 

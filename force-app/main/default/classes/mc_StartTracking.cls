@@ -1,4 +1,5 @@
 global class mc_StartTracking {
+/* This method start tracking details. */
 @InvocableMethod(label='Start Tracking' category='Tracking')
     global static List<Response> startTrackingDetails(List<trackingDetails> trackingDetailsList) {
         List<Response> responses = new List<Response>();
