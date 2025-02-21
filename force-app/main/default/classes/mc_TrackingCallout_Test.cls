@@ -42,7 +42,7 @@ public class mc_TrackingCallout_Test {
         mc_DTO_TrackingDetails trackingDetails = trackingCallouts.getTrackingInformation(shipment.Tracking_Number__c, shipment.Carrier__c);
         
         // Validate the response
-        System.assertNotEquals(trackingDetails, null);
+        System.assertNotEquals(trackingDetails, null, 'Assert that trackingDetails is not null.');
         //System.assertEquals(trackingDetails.trackingResponse.data.status, 'delivered');
         Test.stopTest();
     }
@@ -63,7 +63,7 @@ public class mc_TrackingCallout_Test {
         System.debug('from test => '+JSON.serializePretty(trackingDetails));
         // Validate that the error response is captured
         //System.assertNotEquals(trackingDetails.trackingErrorResponse, null);
-        System.assertEquals(trackingDetails.trackingErrorResponse.errors.size(), 1);
+        System.assertEquals(trackingDetails.trackingErrorResponse.errors.size(), 1, 'Checks that the number of tracking errors is equal to 1.');
         Test.stopTest();
     }
     
