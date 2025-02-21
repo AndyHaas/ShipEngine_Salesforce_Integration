@@ -15,6 +15,5 @@ export default class ShipEngineLoginPage extends LightningElement {
     saveAPIKey(){
         saveApiKey({apiKey:this.apiKey})
         this.template.querySelector('lightning-input').value = null;
-         console.log(`this.apiKey: ${this.apiKey}`);
-    }
+             }
 }
