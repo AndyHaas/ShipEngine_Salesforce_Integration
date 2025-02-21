@@ -1,4 +1,5 @@
 global with sharing class mc_GetTrackingDetails {
+    /* This method gets the tracking details. */
     @InvocableMethod(label='Get Tracking Details' category='Tracking')
     global static List<Response> getTrackingDetails(List<trackingDetails> trackingDetailsList) {
         List<Response> responses = new List<Response>();

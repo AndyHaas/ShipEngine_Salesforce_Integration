@@ -1,5 +1,7 @@
+
 public inherited sharing class mc_SaveAPIKey {
-	@Auraenabled
+	/* Save the API key. */
+ @Auraenabled
     public static void saveApiKey(String apiKey){
         try{
         	ShipEngineAuth__c setting = ShipEngineAuth__c.getOrgDefaults();

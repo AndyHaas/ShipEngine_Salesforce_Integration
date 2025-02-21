@@ -6,7 +6,7 @@ public with sharing class mc_TrackingCallouts extends RestClientLib {
 		this(NAMED_CREDENTIAL_NAME);
 	}
 	public mc_TrackingCallouts(String namedCredentialName){
-		super(namedCredentialName != null ? namedCredentialName : NAMED_CREDENTIAL_NAME);
+		super(namedCredentialName ?? NAMED_CREDENTIAL_NAME);
 	}
 
     /**
