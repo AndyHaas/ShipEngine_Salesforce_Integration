@@ -1,4 +1,5 @@
-public class mc_SaveAPIKey {
+
+public inherited sharing class mc_SaveAPIKey {
 	/* Save the API key. */
  @Auraenabled
     public static void saveApiKey(String apiKey){

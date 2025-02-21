@@ -1,5 +1,5 @@
 @RestResource(urlMapping='/tracking/events/*')
-global class mc_TrackingResource {
+global inherited sharing class mc_TrackingResource {
 
     /* Handle POST request. */
     @HttpPost

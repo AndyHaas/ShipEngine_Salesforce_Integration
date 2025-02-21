@@ -1,4 +1,4 @@
-public class mc_TrackingMasterQueueable implements Queueable{
+public inherited sharing class mc_TrackingMasterQueueable implements Queueable{
     private List<Id> trackingMasterIds;
 
     public mc_TrackingMasterQueueable(List<Id> trackingMasterIds) {
