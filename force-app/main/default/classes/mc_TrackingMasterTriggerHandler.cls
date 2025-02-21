@@ -1,4 +1,4 @@
-public class mc_TrackingMasterTriggerHandler {
+public inherited sharing class mc_TrackingMasterTriggerHandler {
     /**
     * Process Tracking Master records and create related Shipment and Tracking Event records
     * @param trackingMasterRecords The list of Tracking Master records to process
