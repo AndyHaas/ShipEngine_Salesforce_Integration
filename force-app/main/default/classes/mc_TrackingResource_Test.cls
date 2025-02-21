@@ -1,5 +1,6 @@
 @isTest
 public class mc_TrackingResource_Test {
+    /* This method is used to test the basic validation of the API. */
     @isTest
     public static void method1(){
         RestRequest req = new RestRequest();

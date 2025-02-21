@@ -1,5 +1,6 @@
 @isTest
 global class trackingCalloutMock_Failure implements HttpCalloutMock{
+    /* This function returns a response object with the header and body filled with the request id. */
     global HttpResponse respond(HttpRequest req){
         HttpResponse res = new HttpResponse();
         res.setHeader('Content-Type','application/json');

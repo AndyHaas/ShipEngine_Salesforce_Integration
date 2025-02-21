@@ -1,5 +1,6 @@
 @isTest
 public class mc_TrackingCallout_Test {
+    /* Setup method for testability. */
     @testsetup
     public static void setup(){
         ShipEngineAuth__c setting = ShipEngineAuth__c.getOrgDefaults();
@@ -117,6 +118,7 @@ public class mc_TrackingCallout_Test {
             this.mockResponse = mockResponse;
         }
 
+        /* This method returns a mock response. */
         public HttpResponse respond(HttpRequest req) {
             return mockResponse;
         }

@@ -20,10 +20,12 @@ public with sharing class mc_TrackingUltility {
         return headers;
     }
 
+    /* Format the carrier. */
     public static string formatCarrier(String carrier) {
         return carrier != null ? carrier.toLowerCase() : '';
     }
 
+    /* Get tracking status of a specific tag. */
     public static string getTrackingStatus(String status_code) {
         // Convert input to upper case to ensure consistent matching
         String upperStatusCode = status_code != null ? status_code.toUpperCase() : '';
@@ -59,6 +61,7 @@ public with sharing class mc_TrackingUltility {
         }
     }
 
+    /* Get tracking status detail. */
     public static string getTrackingStatusDetail(String status_detail_code) {
         // Convert input to upper case to ensure consistent matching
         String upperStatusDetailCode = status_detail_code != null ? status_detail_code.toUpperCase() : '';

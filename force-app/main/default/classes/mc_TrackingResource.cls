@@ -1,6 +1,7 @@
 @RestResource(urlMapping='/tracking/events/*')
 global class mc_TrackingResource {
 
+    /* Handle POST request. */
     @HttpPost
     global static void handlePost() {
         try{
