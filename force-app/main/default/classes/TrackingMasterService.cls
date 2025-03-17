@@ -77,9 +77,7 @@ public inherited sharing class TrackingMasterService {
         );
 
         for (Tracking_Master__c master : trackingMasterRecords) {
-            Integer existingEventCount = eventCountByMasterId.get(master.Id) != null
-                ? eventCountByMasterId.get(master.Id)
-                : 0;
+            Integer existingEventCount = eventCountByMasterId.get(master.Id) ?? 0;
 
             if (existingEventCount > 0) {
                 alreadyProcessedMasterIds.add(master.Id);
