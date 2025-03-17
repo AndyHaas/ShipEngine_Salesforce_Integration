@@ -129,10 +129,12 @@ public inherited sharing class TrackingMasterService {
     private class TrackingResponseData {
         public ShipStationTrackingResponseDTO trackingResponse;
 
+        /* Returns true if the tracking response is empty. */
         public Boolean isEmpty() {
             return trackingResponse == null || trackingResponse.data == null;
         }
 
+        /* This method returns true if the tracking response has events. */
         public Boolean hasEvents() {
             return !isEmpty() && trackingResponse.data.events != null && !trackingResponse.data.events.isEmpty();
         }

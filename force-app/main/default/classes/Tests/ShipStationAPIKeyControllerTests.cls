@@ -1,5 +1,6 @@
 @IsTest
 public class ShipStationAPIKeyControllerTests {
+    /* Test for upserting API key in custom setting. */
     @IsTest
     public static void testUpsertCustomSettingPositive() {
         User testUser = TestFactory.createTestUser(false, 'System Administrator');

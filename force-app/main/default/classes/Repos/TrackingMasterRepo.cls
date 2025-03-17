@@ -9,6 +9,7 @@ public with sharing class TrackingMasterRepo extends BaseRepo {
         super(Tracking_Master__c.SObjectType, true);
     }
 
+    /* This method creates a new record in the database from a ShipStationTrackingResponseDTO. */
     public Database.SaveResult createTrackingMasterRecordFromDTO(ShipStationTrackingResponseDTO trackingResponse) {
         Database.SaveResult contentVersionSaveResult = contentRepo.createContentVersion(
             Blob.valueOf(JSON.serialize(trackingResponse))
@@ -35,6 +36,7 @@ public with sharing class TrackingMasterRepo extends BaseRepo {
         return trackingMasterInsertResult;
     }
 
+    /* Fetch a list of tracking masters by their ids. */
     public Tracking_Master__c[] fetchTrackingMastersById(List<Id> trackingMasterIds) {
         String selectClause = this.calculateSelectClause(
             new Set<String>{ 'Id', 'Tracking_Number__c', 'Content_Version_Id__c' }

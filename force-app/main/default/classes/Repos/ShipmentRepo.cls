@@ -3,10 +3,12 @@ public with sharing class ShipmentRepo extends BaseRepo {
         super(Shipment__c.SObjectType);
     }
 
+    /* This method is used to upsert a list of Shipment objects. */
     public Database.UpsertResult[] upsertShipments(Shipment__c[] shipments) {
         return this.doUpsert(shipments);
     }
 
+    /* fetchShipmentByTrackingNumber This method will return the Shipment object for the given tracking number */
     public Shipment__c fetchShipmentByTrackingNumber(String trackingNumber) {
         Shipment__c shipment = new Shipment__c();
         Shipment__c[] shipments;
@@ -19,6 +21,7 @@ public with sharing class ShipmentRepo extends BaseRepo {
         return shipment;
     }
 
+    /* Fetches Shipment by tracking numbers. */
     public Shipment__c[] fetchShipmentsByTrackingNumbers(List<String> trackingNumbers) {
         String selectClause = this.calculateSelectClause(
             new Set<String>{
