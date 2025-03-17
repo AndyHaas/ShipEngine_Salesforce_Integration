@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="Basic Ruleset"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
+>
+
+    <description>BAH Ruleset</description>
+
+    <!-- COMPLEXITY -->
+    <rule ref="category/apex/design.xml/ExcessiveClassLength">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="1000" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/ExcessiveParameterList">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="5" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/ExcessivePublicCount">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="25" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/NcssConstructorCount">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="20" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/NcssMethodCount">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="60" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/NcssTypeCount">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="700" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/StdCyclomaticComplexity">
+        <priority>3</priority>
+        <properties>
+            <property name="reportLevel" value="10" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/TooManyFields">
+        <priority>3</priority>
+        <properties>
+            <property name="maxfields" value="20" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/AvoidDeeplyNestedIfStmts">
+        <priority>3</priority>
+        <properties>
+            <property name="problemDepth" value="4" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/design.xml/CyclomaticComplexity">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/design.xml/CognitiveComplexity" />
+
+    <!-- PERFORMANCE -->
+    <rule ref="category/apex/performance.xml/OperationWithLimitsInLoop">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/bestpractices.xml/AvoidLogicInTrigger">
+        <priority>2</priority>
+    </rule>
+    <rule ref="category/apex/bestpractices.xml/AvoidGlobalModifier">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/performance.xml/EagerlyLoadedDescribeSObjectResult" />
+<!--    <rule name="AvoidDebugStatements" language="apex" class="net.sourceforge.pmd.lang.rule.xpath.XPathRule" message="Debug statements are not allowed in committed code. Please refactor to using Logger.* methods.">-->
+<!--        <priority>1</priority>-->
+<!--        <properties>-->
+<!--            <property name="xpath">-->
+<!--                <value><![CDATA[ //MethodCallExpression[lower-case(@FullMethodName)='system.debug'][count(*)=2] ]]></value>-->
+<!--            </property>-->
+<!--        </properties>-->
+<!--    </rule>-->
+
+    <!-- NAMING -->
+    <rule ref="category/apex/codestyle.xml/MethodNamingConventions">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/FieldNamingConventions">
+        <priority>2</priority>
+        <properties>
+            <property name="enumConstantPattern" value="[A-Z][A-Z0-9_]{3,}" />
+            <property name="constantPattern" value="[A-Z][A-Z0-9_]{3,}" />
+            <property name="finalPattern" value="[a-z][a-zA-Z0-9]{3,}" />
+            <property name="staticPattern" value="[a-z][a-zA-Z0-9]{3,}" />
+            <property name="instancePattern" value="[a-z][a-zA-Z0-9]{3,}" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/FormalParameterNamingConventions">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/LocalVariableNamingConventions">
+        <priority>2</priority>
+        <properties>
+            <property name="finalLocalPattern" value="[a-z][a-zA-Z0-9]{2,}" />
+            <property name="localPattern" value="[a-z][a-zA-Z0-9]{2,}" />
+        </properties>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/PropertyNamingConventions">
+        <priority>3</priority>
+    </rule>
+
+    <rule ref="category/apex/bestpractices.xml/ApexUnitTestShouldNotUseSeeAllDataTrue">
+        <priority>2</priority>
+    </rule>
+    <rule ref="category/apex/bestpractices.xml/ApexUnitTestClassShouldHaveRunAs">
+        <priority>2</priority>
+    </rule>
+    <rule ref="category/apex/bestpractices.xml/ApexAssertionsShouldIncludeMessage" />
+    <rule ref="category/apex/bestpractices.xml/ApexUnitTestMethodShouldHaveIsTestAnnotation" />
+    <rule ref="category/apex/bestpractices.xml/ApexUnitTestClassShouldHaveAsserts">
+        <priority>3</priority>
+        <properties>
+            <property name="additionalAssertMethodPattern" value="((System\.Assert|Assert|Asserts)\.\w+|verify\w+)" />
+        </properties>
+    </rule>
+
+    <!-- SECURITY -->
+    <rule ref="category/apex/security.xml">
+        <priority>1</priority>
+    </rule>
+
+    <!-- BRACES -->
+    <rule ref="category/apex/codestyle.xml/IfStmtsMustUseBraces">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/WhileLoopsMustUseBraces">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/IfElseStmtsMustUseBraces">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/ForLoopsMustUseBraces">
+        <priority>3</priority>
+    </rule>
+
+    <!-- ERROR PRONE -->
+    <rule ref="category/apex/errorprone.xml">
+        <priority>2</priority>
+    </rule>
+
+    <!-- STYLE -->
+    <rule ref="category/apex/codestyle.xml/OneDeclarationPerLine">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/FieldDeclarationsShouldBeAtStart" />
+
+    <!-- DOCUMENTATION -->
+    <rule ref="category/apex/documentation.xml/ApexDoc">
+        <priority>3</priority>
+        <properties>
+            <property name="reportMissingDescription" value="true" />
+            <property name="reportPrivate" value="false" />
+            <property name="reportProtected" value="true" />
+            <property name="reportProperty" value="true" />
+        </properties>
+    </rule>
+
+    <!-- CLARITY / BEST PRACTICES -->
+    <rule ref="category/apex/bestpractices.xml/DebugsShouldUseLoggingLevel">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/bestpractices.xml/UnusedLocalVariable" />
+
+    <!-- CUSTOM RULES -->
+<!--    <rule name="NullValueCheckBeforeEmptyCheck" language="apex" class="net.sourceforge.pmd.lang.rule.xpath.XPathRule" message="You must check for null before running .isEmpty() on a collection">-->
+<!--        <priority>2</priority>-->
+<!--        <properties>-->
+<!--            <property name="xpath">-->
+<!--                <value-->
+<!--                ><![CDATA[ //BooleanExpression[@Op="&&"][ child::*[2][ self::BooleanExpression[@Op="!="][ child::*[1][self::VariableExpression] and-->
+<!--                    child::*[2][self::LiteralExpression[@LiteralType="NULL"]] ] ] ] ]]></value-->
+<!--                >-->
+<!--            </property>-->
+<!--        </properties>-->
+<!--    </rule>-->
+
+    <rule
+        name="BumpApiVersion"
+        language="xml"
+        class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+        message="You're currently using an API Version below 60.0. Please upgrade to 60.0"
+    >
+        <priority>3</priority>
+        <properties>
+            <property name="xpath">
+                <value><![CDATA[ //apiVersion/text[number(@Image) < 60] ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <!--  CUSTOM FLOW RULES  -->
+    <rule
+        name="DMLStatementInFlowLoop"
+        language="xml"
+        class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+        message="You have a DML statement within a loop, which is not performant, and may hit limits. Please refactor."
+    >
+        <priority>2</priority>
+        <properties>
+            <property name="xpath">
+                <value
+                ><![CDATA[ //Flow/loops//targetReference/text[@Image=//Flow/(recordCreates|recordDeletes|recordUpdates)/name/text/@Image] ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <!--  CUSTOM OBJECT AND CUSTOM FIELD RULES  -->
+    <rule
+        name="MetadataRequiresDescription"
+        language="xml"
+        class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+        message="Custom object and Custom field Metatdata files must contain valid description tags."
+    >
+        <priority>2</priority>
+        <properties>
+            <property name="xpath">
+                <value><![CDATA[ //(CustomObject | CustomField)[not(description)] ]]></value>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Profile and Permission Set Rules -->
+
+    <rule
+        name="ModifyOrViewAllOnPermSet"
+        language="xml"
+        class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+        message="You are not allowed to commit a Profile or Permission set that gives Modify or View all data."
+    >
+        <priority>1</priority>
+        <properties>
+            <property name="xpath">
+                <value
+                ><![CDATA[ //PermissionSet/userPermissions[ name/text[@Image='ModifyAllData' or @Image='ViewAllData'] and enabled/text[@Image='true'] ] ]]> </value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule
+        name="ModifyOrViewAllOnSysAdminProfile"
+        language="xml"
+        class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+        message="Only Admins can view and modify all data, if any other profile get these permissions, they could manipulate records that shouldn't"
+    >
+        <priority>1</priority>
+        <properties>
+            <property name="xpath">
+                <value
+                ><![CDATA[ //Profile/userPermissions[ name/text[@Image='ModifyAllData' or @Image='ViewAllData'] and enabled/text[@Image='true'] and pmd:fileName() != 'System
+                    Administrator' ] ]]>
+                </value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule
+        name="ManageUsersByNonSysAdmins"
+        language="xml"
+        class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+        message="Managing users need to be limited to System Administrator Profile only."
+    >
+        <priority>1</priority>
+        <properties>
+            <property name="xpath">
+                <value
+                ><![CDATA[ //Profile/userPermissions[ pmd:fileName() != 'System Administrator' and name/text[@Image='ManageUsers'] ] ]]> </value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule
+        name="ViewSetupByNonSysAdmins"
+        language="xml"
+        class="net.sourceforge.pmd.lang.rule.xpath.XPathRule"
+        message="Exposing the setup menu to non-authorized users via profile or permset is not allowed."
+    >
+        <priority>1</priority>
+        <properties>
+            <property name="xpath">
+                <value
+                ><![CDATA[ //Profile/userPermissions[ pmd:fileName() != 'System Administrator' and enabled/text[@Image='true'] and name/text[@Image='ViewSetup'] ] ]]>
+                </value>
+            </property>
+        </properties>
+    </rule>
+</ruleset>
