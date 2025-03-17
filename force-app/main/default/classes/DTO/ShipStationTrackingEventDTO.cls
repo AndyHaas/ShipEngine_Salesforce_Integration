@@ -54,6 +54,7 @@ public with sharing class ShipStationTrackingEventDTO {
     @AuraEnabled
     public Decimal longitude;
 
+    /* This method converts the event to a Shipment_Events object. */
     public Shipment_Events__c toShipmentEvent(Id shipmentId, String shipmentStatusCode) {
         Shipment_Events__c shipmentEvent = new Shipment_Events__c();
         shipmentEvent.Shipment__c = shipmentId;
@@ -117,6 +118,7 @@ public with sharing class ShipStationTrackingEventDTO {
         return 'UN';
     }
 
+    /* This method converts this object to a Tracking_Event object. */
     public Tracking_Event__c toTrackingEvent(Id shipmentId, Id trackingMasterId) {
         Tracking_Event__c trackingEvent = new Tracking_Event__c();
         trackingEvent.City_Locality__c = city_locality;

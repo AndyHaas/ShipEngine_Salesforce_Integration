@@ -3,6 +3,7 @@ public with sharing class ContentRepo extends BaseRepo {
         super(ContentVersion.SObjectType, true);
     }
 
+    /* Create a new content version. */
     public Database.SaveResult createContentVersion(Blob versionData) {
         ContentVersion contentVersion = new ContentVersion();
         contentVersion.VersionData = versionData;
@@ -15,11 +16,13 @@ public with sharing class ContentRepo extends BaseRepo {
         return doCreate(contentVersion);
     }
 
+    /* Fetch the content version body by id. */
     public String fetchContentVersionBodyById(Id contentVersionId) {
         ContentVersion contentVersion = (ContentVersion) fetchById(contentVersionId, new Set<String>{ 'VersionData' });
         return contentVersion.VersionData.toString();
     }
 
+    /* Fetch content versions by id. */
     public Map<Id, String> fetchContentVersionsById(List<Id> contentVersionIds) {
         Map<Id, String> contentVersionMap = new Map<Id, String>();
         List<ContentVersion> contentVersions = this.fetch(

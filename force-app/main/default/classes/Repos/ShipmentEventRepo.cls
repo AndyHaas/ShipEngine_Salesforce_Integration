@@ -3,6 +3,7 @@ public with sharing class ShipmentEventRepo extends BaseRepo {
         super(Shipment_Events__c.SObjectType, true);
     }
 
+    /* Fetches Shipment_Events_c array for a given Shipment_Id. */
     public Shipment_Events__c[] fetchShipmentEventsByShipmentId(Id shipmentId) {
         String selectClause = this.calculateSelectClause(
             new Set<String>{
