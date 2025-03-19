@@ -2,7 +2,7 @@
  * @description This utility class provides helper methods for interacting with the ShipEngine API.
  * It includes methods for retrieving API configuration details, formatting carrier codes, and mapping tracking statuses.
  */
-public with sharing class ShipStationTrackingUtilities {
+public with sharing class ShipStationTrackingHelper {
     /**
      * @description Retrieves the base URL for the ShipEngine API.
      * This method returns a hardcoded URL string that serves as the endpoint for API requests.

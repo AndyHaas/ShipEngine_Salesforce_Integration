@@ -47,7 +47,7 @@ public with sharing class ShipStationAPI extends RestClientLib {
         loggerRequest.setMethod('GET');
         // Nebula.Logger.debug('Tracking API Request').setHttpRequestDetails(loggerRequest);
         //made changes here
-        HttpResponse result = get(endpoint, query, '', ShipStationTrackingUtilities.getHeaders(), false);
+        HttpResponse result = get(endpoint, query, '', ShipStationTrackingHelper.getHeaders(), false);
         // Nebula.Logger.debug('Tracking API Response').setHttpResponseDetails(result);
         // Parse the response
         if (result.getStatusCode() == 200) {
@@ -114,7 +114,7 @@ public with sharing class ShipStationAPI extends RestClientLib {
             System.debug(LoggingLevel.ERROR, 'Error getting webhook details: ' + e.getStackTraceString());
         }
 
-        HttpResponse result = post(endpoint, query, null, ShipStationTrackingUtilities.getHeaders(), false);
+        HttpResponse result = post(endpoint, query, null, ShipStationTrackingHelper.getHeaders(), false);
 
         if (result.getStatusCode() == 200) {
             // Nebula.Logger.info('Tracking request started successfully');
@@ -157,7 +157,7 @@ public with sharing class ShipStationAPI extends RestClientLib {
         loggerRequest.setMethod(method);
         // Nebula.Logger.debug('Starting Tracking API Request').setHttpRequestDetails(loggerRequest);
 
-        HttpResponse result = post(endpoint, null, null, ShipStationTrackingUtilities.getHeaders(), false);
+        HttpResponse result = post(endpoint, null, null, ShipStationTrackingHelper.getHeaders(), false);
         // Nebula.Logger.debug('Starting Tracking API Response').setHttpResponseDetails(result);
 
         if (result.getStatusCode() == 204) {
