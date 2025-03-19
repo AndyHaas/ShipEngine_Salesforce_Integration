@@ -28,7 +28,6 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <apiVersion>62.0</apiVersion>
-<!--    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>-->
     <constants>
         <name>const_FlowApiName</name>
         <dataType>String</dataType>

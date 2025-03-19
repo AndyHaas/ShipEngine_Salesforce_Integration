@@ -3,8 +3,11 @@ public with sharing class TrackingEventRepo extends BaseRepo {
         super(Tracking_Event__c.SObjectType, true);
     }
 
+    @TestVisible
     private static Datetime parse8601String(String dateTimeString) {
-        return (Datetime) JSON.deserialize(dateTimeString, Datetime.class);
+        String jsonDatetime = '"' + dateTimeString + '"';
+        system.debug('Converting: ' + jsonDatetime);
+        return (Datetime) JSON.deserialize(jsonDatetime, Datetime.class);
     }
 
     /**

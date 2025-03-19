@@ -5,7 +5,7 @@
         <label>Get Tracking Details</label>
         <locationX>578</locationX>
         <locationY>458</locationY>
-        <actionName>mc_GetTrackingDetails</actionName>
+        <actionName>GetTrackingDetailsInvocable</actionName>
         <actionType>apex</actionType>
         <connector>
             <targetReference>Set_Updated_Values_for_Shipment</targetReference>
@@ -23,7 +23,7 @@
                 <elementReference>Get_Shipment_Record.Carrier__c</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>mc_GetTrackingDetails</nameSegment>
+        <nameSegment>GetTrackingDetailsInvocable</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>

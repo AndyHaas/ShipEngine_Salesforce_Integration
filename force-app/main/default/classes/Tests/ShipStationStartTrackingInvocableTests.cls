@@ -5,59 +5,35 @@
 @IsTest
 private class ShipStationStartTrackingInvocableTests {
     /**
-     * @description Mock class for successful tracking requests
+     * @description Creates an HttpCalloutMockFactory for successful tracking responses
+     * @return HttpCalloutMockFactory configured with appropriate responses
      */
-    private class SuccessTrackingCalloutMock implements HttpCalloutMock {
-        /**
-         * @description Responds with a successful tracking response
-         * @param req The HTTP request
-         * @return HttpResponse A mock response with success data
-         */
-        public HttpResponse respond(HttpRequest req) {
-            HttpResponse res = new HttpResponse();
-            res.setHeader('Content-Type', 'application/json');
+    private static HttpCalloutMockFactory createSuccessMockFactory() {
+        // Set up the responses in order they'll be called
+        List<HttpResponse> responses = new List<HttpResponse>();
+        Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
 
-            // If it's the webhook subscription request, return success
-            if (req.getEndpoint().contains('environment/webhooks')) {
-                res.setStatusCode(204);
-                return res;
-            }
+        // First for webhook subscription (environment/webhooks endpoint)
+        HttpResponse webhookResponse = HttpCalloutMockFactory.generateHttpResponse(204, 'No Content', '', headers);
+        responses.add(webhookResponse);
 
-            // For tracking start request
-            if (req.getEndpoint().contains('tracking/start')) {
-                res.setBody(
-                    '{"webhook_id":"wh_123456","url":"https://example.com/webhook","event":"TRACKING_UPDATE","headers":[{"key":"Authorization","value":"Bearer token123"}]}'
-                );
-                res.setStatusCode(200);
-                return res;
-            }
+        // Second for tracking start request (tracking/start endpoint)
+        String trackingBody = '{"webhook_id":"wh_123456","url":"https://example.com/webhook","event":"TRACKING_UPDATE","headers":[{"key":"Authorization","value":"Bearer token123"}]}';
+        HttpResponse trackingResponse = HttpCalloutMockFactory.generateHttpResponse(200, 'OK', trackingBody, headers);
+        responses.add(trackingResponse);
 
-            // Default response
-            res.setStatusCode(404);
-            return res;
-        }
+        return new HttpCalloutMockFactory(responses);
     }
 
     /**
-     * @description Mock class for failed tracking requests
+     * @description Creates an HttpCalloutMockFactory for failed tracking responses
+     * @return HttpCalloutMockFactory configured with error responses
      */
-    private class FailureTrackingCalloutMock implements HttpCalloutMock {
-        /**
-         * @description Responds with a failure tracking response
-         * @param req The HTTP request
-         * @return HttpResponse A mock response with error data
-         */
-        public HttpResponse respond(HttpRequest req) {
-            HttpResponse res = new HttpResponse();
-            res.setHeader('Content-Type', 'application/json');
+    private static HttpCalloutMockFactory createFailureMockFactory() {
+        Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+        String errorBody = '{"request_id":"req_error123","errors":[{"message":"Invalid tracking number or carrier code"}]}';
 
-            // Both webhook and tracking start requests fail
-            res.setBody(
-                '{"request_id":"req_error123","errors":[{"message":"Invalid tracking number or carrier code"}]}'
-            );
-            res.setStatusCode(400);
-            return res;
-        }
+        return new HttpCalloutMockFactory(400, 'Bad Request', errorBody, headers);
     }
 
     /**
@@ -86,8 +62,8 @@ private class ShipStationStartTrackingInvocableTests {
             details
         };
 
-        // Set the mock callout class
-        Test.setMock(HttpCalloutMock.class, new SuccessTrackingCalloutMock());
+        // Set the mock callout class using HttpCalloutMockFactory
+        Test.setMock(HttpCalloutMock.class, createSuccessMockFactory());
 
         // Execute the test
         List<ShipStationStartTrackingInvocable.TrackingResponseResult> results;
@@ -129,8 +105,8 @@ private class ShipStationStartTrackingInvocableTests {
             details
         };
 
-        // Set the mock callout class
-        Test.setMock(HttpCalloutMock.class, new FailureTrackingCalloutMock());
+        // Set the mock callout class using HttpCalloutMockFactory
+        Test.setMock(HttpCalloutMock.class, createFailureMockFactory());
 
         // Execute the test
         List<ShipStationStartTrackingInvocable.TrackingResponseResult> results;
@@ -173,8 +149,24 @@ private class ShipStationStartTrackingInvocableTests {
         details2.trackingNumberCarrierCode = 'usps';
         detailsList.add(details2);
 
-        // Set the mock callout class
-        Test.setMock(HttpCalloutMock.class, new SuccessTrackingCalloutMock());
+        // Set the mock callout class using HttpCalloutMockFactory
+        // We need multiple responses for multiple items
+        List<HttpResponse> responses = new List<HttpResponse>();
+        Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+
+        // Add 4 responses (webhook + tracking for each of 2 items)
+        for (Integer i = 0; i < 4; i++) {
+            if (Math.mod(i, 2) == 0) {
+                // Webhook response
+                responses.add(HttpCalloutMockFactory.generateHttpResponse(204, 'No Content', '', headers));
+            } else {
+                // Tracking response
+                String trackingBody = '{"webhook_id":"wh_123456","url":"https://example.com/webhook","event":"TRACKING_UPDATE","headers":[{"key":"Authorization","value":"Bearer token123"}]}';
+                responses.add(HttpCalloutMockFactory.generateHttpResponse(200, 'OK', trackingBody, headers));
+            }
+        }
+
+        Test.setMock(HttpCalloutMock.class, new HttpCalloutMockFactory(responses));
 
         // Execute the test
         List<ShipStationStartTrackingInvocable.TrackingResponseResult> results;
@@ -223,8 +215,9 @@ private class ShipStationStartTrackingInvocableTests {
         nullCarrierCode.trackingNumberCarrierCode = null;
         detailsList.add(nullCarrierCode);
 
-        // Set the mock callout class
-        Test.setMock(HttpCalloutMock.class, new SuccessTrackingCalloutMock());
+        // Set the mock callout class - although it's not expected to be used in this test
+        // since the method should return empty list when tracking number or carrier code is null
+        Test.setMock(HttpCalloutMock.class, createSuccessMockFactory());
 
         // Execute the test
         List<ShipStationStartTrackingInvocable.TrackingResponseResult> results;

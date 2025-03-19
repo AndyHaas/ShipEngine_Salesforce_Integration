@@ -315,13 +315,20 @@ private class TrackingEventRepoTests {
      */
     @IsTest
     static void unitParse8601StringPositive() {
-        // This is a private method, so we test indirectly through the TrackingMasterService
-        // DTO conversion which uses this method
-
         // Setup
         User testUser = [SELECT Id FROM User WHERE Profile.Name = 'System Administrator' AND IsActive = TRUE LIMIT 1];
+        // Execute test
+        System.runAs(testUser) {
+            Test.startTest();
+            Datetime results = TrackingEventRepo.parse8601String('2025-03-18T22:30:45Z');
 
-        // Test is skipped since we can't directly test private methods
-        // The method is tested indirectly through other tests that use DTOs
+            // Verify results
+            Assert.areEqual(
+                Datetime.newInstanceGmt(2025, 3, 18, 22, 30, 45),
+                results,
+                'Should return the correct datetime'
+            );
+            Test.stopTest();
+        }
     }
 }

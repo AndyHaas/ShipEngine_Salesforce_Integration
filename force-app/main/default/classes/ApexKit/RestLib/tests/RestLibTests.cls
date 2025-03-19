@@ -302,4 +302,203 @@ private class RestLibTests {
             Assert.isTrue(result.endsWith('/'), 'Expected the result to end with a slash');
         }
     }
+
+    /* Additional tests to improve coverage of RestClientLib methods */
+
+    @IsTest
+    private static void testMakeApiCallWithPathQueryBodyPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            HttpResponse response = restClientLib.makeApiCall(HttpVerb.GET, '/', 'test=1', 'body');
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testMakeApiCallWithPathQueryBodyHeadersPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.makeApiCall(HttpVerb.GET, '/', 'test=1', 'body', headers);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testMakeApiCallWithPathQueryBodyHeadersEncodeQueryPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.makeApiCall(HttpVerb.GET, '/', 'test=1', 'body', headers, true);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testMakeApiCallWithPathAndHeadersPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.makeApiCall(HttpVerb.GET, '/', headers);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testGetWithPathBodyHeadersPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.get('/', 'body', headers);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testGetWithPathQueryBodyHeadersEncodeQueryPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.get('/', 'test=1', 'body', headers, true);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testDelWithPathQueryHeadersPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.del('/', 'test=1', headers);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testPostWithPathQueryBodyHeadersPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(201, 'Created', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.post('/', 'test=1', '{"data":"value"}', headers);
+            Test.stopTest();
+
+            Assert.areEqual(201, response.getStatusCode(), 'Expected to get the 201 response code');
+        }
+    }
+
+    @IsTest
+    private static void testPostWithPathQueryBodyHeadersEncodeQueryPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(201, 'Created', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.post('/', 'test=1', '{"data":"value"}', headers, true);
+            Test.stopTest();
+
+            Assert.areEqual(201, response.getStatusCode(), 'Expected to get the 201 response code');
+        }
+    }
+
+    @IsTest
+    private static void testPutWithPathQueryBodyHeadersPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.put('/', 'test=1', '{"data":"value"}', headers);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
+
+    @IsTest
+    private static void testPatchWithPathQueryBodyHeadersPositive() {
+        User testUser = createTestUser();
+
+        System.runAs(testUser) {
+            RestClientLib restClientLib = new RestClientLib('DummyNamedCredential');
+            HttpCalloutMockFactory mock = new HttpCalloutMockFactory(200, 'OK', 'OK', new Map<String, String>());
+            Test.setMock(HttpCalloutMock.class, mock);
+
+            Test.startTest();
+            Map<String, String> headers = new Map<String, String>{ 'Content-Type' => 'application/json' };
+            HttpResponse response = restClientLib.patch('/', 'test=1', '{"data":"value"}', headers);
+            Test.stopTest();
+
+            Assert.areEqual(200, response.getStatusCode(), 'Expected to get the 200 response code');
+        }
+    }
 }
