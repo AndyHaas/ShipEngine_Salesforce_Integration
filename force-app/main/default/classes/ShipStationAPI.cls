@@ -39,7 +39,7 @@ public with sharing class ShipStationAPI extends RestClientLib {
 
         // Prep the response
         ShipStationTrackingDetailsDTO response = new ShipStationTrackingDetailsDTO();
-        ShipStationTrackingDataDTO trackingData = new ShipStationTrackingDataDTO();
+        // ShipStationTrackingDataDTO trackingData = new ShipStationTrackingDataDTO();
 
         //Construct request for logging purposes
         HttpRequest loggerRequest = new HttpRequest();
@@ -105,25 +105,16 @@ public with sharing class ShipStationAPI extends RestClientLib {
         // We need to query ShipEngine_Webhook__mdt and ensure that Webhook_Event_Type__c = 'track'
         // if not, we need to create a new webhook with the event type 'track'
         // if it does, then continue with the request
-        List<ShipEngine_Webhook__mdt> webhook = [
-            SELECT Id, Webhook_URL__c, Webhook_Event_Type__c
-            FROM ShipEngine_Webhook__mdt
-            WHERE Webhook_Event_Type__c = 'track'
-            LIMIT 1
-        ];
-
-        if (webhook.size() == 0) {
-            subscribeToTrackingEvents();
+        try {
+            ShipEngine_Webhook__mdt webhook = new ShipEngineWebhookConfigurationRepo().getWebhookDetailsByType('track');
+            if (webhook == null || !webhook.Webhook_Active__c) {
+                subscribeToTrackingEvents();
+            }
+        } catch (Exception e) {
+            System.debug(LoggingLevel.ERROR, 'Error getting webhook details: ' + e.getStackTraceString());
         }
 
-        // Construct request for logging purposes
-        HttpRequest loggerRequest = new HttpRequest();
-        loggerRequest.setEndpoint(endpoint + '?' + query);
-        loggerRequest.setMethod('POST');
-        // Nebula.Logger.debug('Tracking API Request').setHttpRequestDetails(loggerRequest);
-
         HttpResponse result = post(endpoint, query, null, ShipStationTrackingUtilities.getHeaders(), false);
-        // Nebula.Logger.debug('Tracking API Response').setHttpResponseDetails(result);
 
         if (result.getStatusCode() == 200) {
             // Nebula.Logger.info('Tracking request started successfully');
@@ -142,77 +133,6 @@ public with sharing class ShipStationAPI extends RestClientLib {
 
         return response;
     }
-
-    /**
-     * View tracking requests from ShipEngine
-     * @param webhookId The webhook ID to view
-     * @return The response from the ShipEngine API
-     */
-    // public mc_DTO_WebhookDetails viewTrackingRequests(String webhookId) {
-    //     // Endpoint URL
-    //     String endpoint = 'environment/webhooks/' + webhookId;
-    //     // Method
-    //     String method = 'GET';
-
-    //     // Construct request for logging purposes
-    //     HttpRequest loggerRequest = new HttpRequest();
-    //     loggerRequest.setEndpoint(endpoint);
-    //     loggerRequest.setMethod(method);
-    //     Nebula.Logger.debug('Getting List of Webhooks Request').setHttpRequestDetails(loggerRequest);
-
-    //     HttpResponse result = get(endpoint, null, mc_TrackingUltility.getHeaders(), false);
-    //     Nebula.Logger.debug('Getting List of Webhooks Response').setHttpResponseDetails(result);
-
-    //     if (result.getStatusCode() == 200) {
-    //         Nebula.Logger.info('Getting List of Webhooks successful');
-    //         // Parse the response body
-    //         response.webhookList = (mc_DTO_WebhookList) JSON.deserialize(result.getBody(), mc_DTO_WebhookList.class);
-    //     } else {
-    //         Nebula.Logger.error('Error getting list of webhooks: ' + result.getBody());
-    //         response.trackingErrorResponse = (mc_DTO_TrackingErrorResponse) JSON.deserialize(result.getBody(), mc_DTO_TrackingErrorResponse.class);
-    //     }
-
-    //     return response;
-
-    // }
-
-    /**
-     * Delete a tracking request from ShipEngine
-     * @param webhookId The webhook ID to delete
-     * @return The response from the ShipEngine API
-     */
-    // public mc_DTO_WebhookDetails deleteTrackingRequest(String webhookId) {
-    //     // Endpoint URL
-    //     String endpoint = 'environment/webhooks/' + webhookId;
-    //     // Method
-    //     String method = 'DELETE';
-
-    //     // Check if the webhookId is null
-    //     if (webhookId == null) {
-    //         Nebula.Logger.error('Error deleting tracking request: webhookId is null');
-    //         return null;
-    //     } else {
-    //         // This will not have a response body but we will get a 204 response
-
-    //         // Construct request for logging purposes
-    //         HttpRequest loggerRequest = new HttpRequest();
-    //         loggerRequest.setEndpoint(endpoint);
-    //         loggerRequest.setMethod(method);
-    //         Nebula.Logger.debug('Starting Tracking API Request').setHttpRequestDetails(loggerRequest);
-
-    //         HttpResponse result = del(endpoint, null, mc_TrackingUltility.getHeaders());
-    //         Nebula.Logger.debug('Starting Tracking API Response').setHttpResponseDetails(result);
-
-    //         if (result.getStatusCode() == 204) {
-    //             Nebula.Logger.info('Starting Tracking request started successfully');
-
-    //         } else {
-    //             Nebula.Logger.error('Error starting tracking webhook: ' + result.getBody());
-    //             response.trackingErrorResponse = (mc_DTO_TrackingErrorResponse) JSON.deserialize(result.getBody(), mc_DTO_TrackingErrorResponse.class);
-    //         }
-    //     }
-    //     return response;
-    // }
 
     /**
      * @description Subscribes to tracking updates for packages by creating a webhook subscription.
@@ -241,6 +161,7 @@ public with sharing class ShipStationAPI extends RestClientLib {
         // Nebula.Logger.debug('Starting Tracking API Response').setHttpResponseDetails(result);
 
         if (result.getStatusCode() == 204) {
+            System.debug(LoggingLevel.INFO, 'Starting Tracking request started successfully');
             // Nebula.Logger.info('Starting Tracking request started successfully');
         } else {
             // Nebula.Logger.error('Error starting tracking webhook: ' + result.getBody());

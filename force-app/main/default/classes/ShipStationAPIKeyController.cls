@@ -19,6 +19,7 @@ public inherited sharing class ShipStationAPIKeyController {
             repo.saveApiKey(apiKey);
         } catch (DmlException dmlException) {
             // Error caught
+            System.debug(LoggingLevel.ERROR, 'Error saving API key: ' + dmlException.getMessage());
         }
     }
 }
