@@ -11,7 +11,7 @@
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>ShipStation Integration</label>
-    <navType>Standard</navType>
+    <navType>Console</navType>
     <tabs>Tracking_Master__c</tabs>
     <tabs>Tracking_Event__c</tabs>
     <tabs>Shipment__c</tabs>
