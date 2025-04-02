@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Get_Tracking_Details</name>
@@ -28,6 +28,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <constants>
         <name>const_FlowApiName</name>
         <dataType>String</dataType>
@@ -85,21 +86,18 @@
             <label>No Tracking Number</label>
         </rules>
     </decisions>
-    <description
-    >This will get and schedule an update on the tracking information. The schedule is to get the Tracking Events updated as well</description>
+    <description>This will get and schedule an update on the tracking information. The schedule is to get the Tracking Events updated as well</description>
     <environments>Default</environments>
     <formulas>
         <name>datetime_ActualDeliveryDate</name>
         <dataType>DateTime</dataType>
-        <expression
-        >IF(NOT(ISBLANK({!Get_Tracking_Details.trackingResponse.trackingResponse.data.actual_delivery_date})),
+        <expression>IF(NOT(ISBLANK({!Get_Tracking_Details.trackingResponse.trackingResponse.data.actual_delivery_date})),
 DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.actual_delivery_date}),null)</expression>
     </formulas>
     <formulas>
         <name>datetime_EstimatedDeliveryDate</name>
         <dataType>DateTime</dataType>
-        <expression
-        >IF(NOT(ISBLANK({!Get_Tracking_Details.trackingResponse.trackingResponse.data.estimated_delivery_date})),
+        <expression>IF(NOT(ISBLANK({!Get_Tracking_Details.trackingResponse.trackingResponse.data.estimated_delivery_date})),
 DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.estimated_delivery_date}), null)</expression>
     </formulas>
     <formulas>
@@ -130,8 +128,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
-        <description
-        >We create this record to call mc_TrackingMasterTrigger which will process another shipment update but also the events. The events is mainly what this is for but also will help ensure all of the updates are done correctly on the Shipment record.</description>
+        <description>We create this record to call mc_TrackingMasterTrigger which will process another shipment update but also the events. The events is mainly what this is for but also will help ensure all of the updates are done correctly on the Shipment record.</description>
         <name>Create_Tracking_Master_Record</name>
         <label>Create Tracking Master Record</label>
         <locationX>578</locationX>
@@ -163,8 +160,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <description
-        >This will update the shipment record with the latest details we have for the shipment record. This may be unnecessary as we have a trigger that does the same update as well, but this allows the user to see an instant update in case the queue able action takes a bit longer.</description>
+        <description>This will update the shipment record with the latest details we have for the shipment record. This may be unnecessary as we have a trigger that does the same update as well, but this allows the user to see an instant update in case the queue able action takes a bit longer.</description>
         <name>Update_Shipment_Record</name>
         <label>Update Shipment Record</label>
         <locationX>578</locationX>
@@ -184,8 +180,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
         <allowPause>false</allowPause>
         <fields>
             <name>Copy_1_of_Copy_1_of_nocarriermessage</name>
-            <fieldText
-            >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 16px; color: rgb(0, 167, 26);&quot;&gt;Tracking Information Updated.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 16px; color: rgb(0, 167, 26);&quot;&gt;Tracking Information Updated.&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -201,8 +196,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
         <allowPause>false</allowPause>
         <fields>
             <name>Copy_1_of_nocarriermessage</name>
-            <fieldText
-            >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 16px; color: rgb(124, 0, 0);&quot;&gt;Not able to get tracking details since there is no tracking number on the shipment.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 16px; color: rgb(124, 0, 0);&quot;&gt;Not able to get tracking details since there is no tracking number on the shipment.&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -218,8 +212,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
         <allowPause>false</allowPause>
         <fields>
             <name>nocarriermessage</name>
-            <fieldText
-            >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 16px; color: rgb(173, 0, 0);&quot;&gt;Not able to get tracking details since there is no carrier on the shipment.&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 16px; color: rgb(173, 0, 0);&quot;&gt;Not able to get tracking details since there is no carrier on the shipment.&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -251,24 +244,21 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
                 <outputFieldApiName>Status_Code__c</outputFieldApiName>
                 <transformType>Map</transformType>
                 <value>
-                    <elementReference
-                    >Get_Tracking_Details.trackingResponse.trackingResponse.data.status_code</elementReference>
+                    <elementReference>Get_Tracking_Details.trackingResponse.trackingResponse.data.status_code</elementReference>
                 </value>
             </transformValueActions>
             <transformValueActions>
                 <outputFieldApiName>Status_Description__c</outputFieldApiName>
                 <transformType>Map</transformType>
                 <value>
-                    <elementReference
-                    >Get_Tracking_Details.trackingResponse.trackingResponse.data.status_description</elementReference>
+                    <elementReference>Get_Tracking_Details.trackingResponse.trackingResponse.data.status_description</elementReference>
                 </value>
             </transformValueActions>
             <transformValueActions>
                 <outputFieldApiName>Exception_Description__c</outputFieldApiName>
                 <transformType>Map</transformType>
                 <value>
-                    <elementReference
-                    >Get_Tracking_Details.trackingResponse.trackingResponse.data.exception_description</elementReference>
+                    <elementReference>Get_Tracking_Details.trackingResponse.trackingResponse.data.exception_description</elementReference>
                 </value>
             </transformValueActions>
             <transformValueActions>
@@ -290,8 +280,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
                 <transformType>Map</transformType>
                 <value>
                     <formulaDataType>DateTime</formulaDataType>
-                    <formulaExpression
-                    >IF(NOT(ISBLANK({!datetime_ActualDeliveryDate})), {!datetime_ActualDeliveryDate},{!Get_Shipment_Record.Actual_Delivery_Date__c})</formulaExpression>
+                    <formulaExpression>IF(NOT(ISBLANK({!datetime_ActualDeliveryDate})), {!datetime_ActualDeliveryDate},{!Get_Shipment_Record.Actual_Delivery_Date__c})</formulaExpression>
                 </value>
             </transformValueActions>
             <transformValueActions>
@@ -299,8 +288,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
                 <transformType>Map</transformType>
                 <value>
                     <formulaDataType>DateTime</formulaDataType>
-                    <formulaExpression
-                    >IF(NOT(ISBLANK({!datetime_EstimatedDeliveryDate})), {!datetime_EstimatedDeliveryDate},{!Get_Shipment_Record.Estimated_Delivery_Date__c})</formulaExpression>
+                    <formulaExpression>IF(NOT(ISBLANK({!datetime_EstimatedDeliveryDate})), {!datetime_EstimatedDeliveryDate},{!Get_Shipment_Record.Estimated_Delivery_Date__c})</formulaExpression>
                 </value>
             </transformValueActions>
             <transformValueActions>
@@ -308,8 +296,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
                 <transformType>Map</transformType>
                 <value>
                     <formulaDataType>DateTime</formulaDataType>
-                    <formulaExpression
-                    >IF(NOT(ISBLANK({!datetime_ShipDate})), {!datetime_ShipDate},{!Get_Shipment_Record.Ship_Date__c})</formulaExpression>
+                    <formulaExpression>IF(NOT(ISBLANK({!datetime_ShipDate})), {!datetime_ShipDate},{!Get_Shipment_Record.Ship_Date__c})</formulaExpression>
                 </value>
             </transformValueActions>
         </transformValues>
@@ -339,8 +326,7 @@ DATETIMEVALUE({!Get_Tracking_Details.trackingResponse.trackingResponse.data.ship
                 <outputFieldApiName>Tracking_Number__c</outputFieldApiName>
                 <transformType>Map</transformType>
                 <value>
-                    <elementReference
-                    >Get_Tracking_Details.trackingResponse.trackingResponse.data.tracking_number</elementReference>
+                    <elementReference>Get_Tracking_Details.trackingResponse.trackingResponse.data.tracking_number</elementReference>
                 </value>
             </transformValueActions>
         </transformValues>

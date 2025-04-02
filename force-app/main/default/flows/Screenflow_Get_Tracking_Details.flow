@@ -23,11 +23,12 @@
                 <elementReference>Get_Shipment_Record.Carrier__c</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>GetTrackingDetailsInvocable</nameSegment>
+        <nameSegment>GetTrackingDetails</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <constants>
         <name>const_FlowApiName</name>
         <dataType>String</dataType>

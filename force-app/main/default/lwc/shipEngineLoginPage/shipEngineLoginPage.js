@@ -1,25 +1,20 @@
-import { LightningElement, api } from "lwc";
-import saveApiKey from "@salesforce/apex/ShipStationAPIKeyController.saveApiKey";
+import { LightningElement } from 'lwc';
+import saveApiKey from '@salesforce/apex/mc_SaveAPIKey.saveApiKey'
 export default class ShipEngineLoginPage extends LightningElement {
-    apiKey = "";
+    apiKey = '';
 
-    // For testing purposes only
-    @api
-    get testApiKey() {
-        return this.apiKey;
+    handleClick(){
+       // window.location.replace("https://dashboard.shipengine.com/");
+        window.open("https://dashboard.shipengine.com/", '_blank').focus();
     }
 
-    handleClick() {
-        // window.location.replace("https://dashboard.shipengine.com/");
-        window.open("https://dashboard.shipengine.com/", "_blank").focus();
+    handleChange(event){
+        this.apiKey = event.currentTarget.value;        
     }
 
-    handleChange(event) {
-        this.apiKey = event.currentTarget.value;
-    }
-
-    saveAPIKey() {
-        saveApiKey({ apiKey: this.apiKey });
-        this.template.querySelector("lightning-input").value = null;
+    saveAPIKey(){
+        saveApiKey({apiKey:this.apiKey})
+        this.template.querySelector('lightning-input').value = null;
+         console.log(`this.apiKey: ${this.apiKey}`);
     }
 }

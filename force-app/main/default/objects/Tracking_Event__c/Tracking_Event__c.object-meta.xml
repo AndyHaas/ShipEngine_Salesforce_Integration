@@ -143,6 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
     <description>This object represents each shipment milestone or event, as detailed in the &quot;events&quot; array.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>

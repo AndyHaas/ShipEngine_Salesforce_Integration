@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
         <fullName>DHL</fullName>
@@ -6,9 +6,9 @@
         <label>DHL</label>
     </customValue>
     <customValue>
-        <fullName>FedEx</fullName>
+        <fullName>FEDEX</fullName>
         <default>false</default>
-        <label>FedEx</label>
+        <label>FEDEX</label>
     </customValue>
     <customValue>
         <fullName>UPS</fullName>
@@ -19,6 +19,11 @@
         <fullName>USPS</fullName>
         <default>false</default>
         <label>USPS</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
     </customValue>
     <masterLabel>Shipping Providers</masterLabel>
     <sorted>false</sorted>

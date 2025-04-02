@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Tracking_URL__c</fullName>
+    <deprecated>false</deprecated>
     <externalId>false</externalId>
     <formula>IF(
     TEXT(Carrier__c) == &quot;Fedex&quot;,&quot;https://www.fedex.com/apps/fedextrack/index.html?tracknumbers=&quot;+Tracking_Number__c+&quot;&amp;cntry_code=us&quot;,

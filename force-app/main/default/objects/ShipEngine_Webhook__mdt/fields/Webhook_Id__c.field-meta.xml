@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Webhook_Id__c</fullName>
     <caseSensitive>true</caseSensitive>
+    <deprecated>false</deprecated>
     <description>The returned id of the webhook that was created</description>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
